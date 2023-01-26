@@ -3,18 +3,19 @@ class Particle {
 	constructor({color, empty} = {}) {
 		this.color = color;
 		this.empty = empty ?? false;
+		this.updated = false;
  	}
 }
 
 class Sand extends Particle {
-	static baseColor = "black";
+	static baseColor = "yellow";
 	constructor() {
 		super({color: Sand.baseColor});
 	}
 }
 
 class Empty extends Particle {
-	static baseColor = "yellow";
+	static baseColor = "black";
 	constructor() {
 		super({color: Empty.baseColor, empty: true});
 	}
@@ -40,6 +41,7 @@ class Grid {
 
 	setIndex(i, particle) {
 		this.grid[i] = particle;
+		this.grid[i].updated = true;
 	}
 
 	clearIndex(i) {
@@ -69,20 +71,30 @@ class Grid {
 	}
 
 	updatePixel(i) {
-		const below = i - this.width;
+		const below = i + this.width;
 		const belowLeft = below - 1;
 		const belowRight = below + 1;
 
 		if (this.isEmpty(below)) {
 			this.swap(i, below);
-		} 
+		} else if (this.isEmpty(belowLeft)) {
+			this.swap(i, belowLeft);
+		} else if (this.isEmpty(belowRight)) {
+			this.swap(i, belowRight);
+		}
 	}
 
 	update() {
-		for (let i = 0; i < this.grid.length - this.width - 1; i++) {
-			this.updatePixel(i);
+		this.grid.forEach(e => {
+			e.updated = false;
+		});
+
+		for (let i = 0; i < this.grid.length; i++) {
+			if (this.grid[i].updated === false) {
+				this.updatePixel(i);
+			}
 			ctx.fillStyle = this.grid[i].color;
-			ctx.fillRect((i % this.width), Math.floor(i / this.height), 1, 1);
+			ctx.fillRect((i % this.width) * SCALE, Math.floor(i / this.height) * SCALE, SCALE, SCALE);
 		}
 	}
 }
@@ -109,8 +121,8 @@ addEventListener("mouseup", e => {
 
 addEventListener("mousemove", e => {
 	const rect = canvas.getBoundingClientRect();
-	mouse.x = (e.clientX - rect.left);
-	mouse.y = (e.clientY - rect.top);
+	mouse.x = Math.floor((e.clientX - rect.left) / SCALE);
+	mouse.y = Math.floor((e.clientY - rect.top) / SCALE);
 });
 
 //render everythin out, and step the sim
