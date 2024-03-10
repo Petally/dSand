@@ -13,6 +13,11 @@ This is not exactly a roadmap, however some key features I intend on implementin
 These features are the ones I see as the most enticing, and I will keep this list even if I do finish the features.
 
 ## Contribution
+### Live server
 In order to get started, simply serve index.html from a live server, in order to not get ECMAscript modules blocked by the CORS policy.
+
+Personally, I use a neovim extension that utilizes the `live-server` npm package. In order to get that setup, simply run:
+`npm install`
+
 
 I'm a git noob, so help me merge your pull request. If your contribution is particularly great, I may just pull it to the repo.
