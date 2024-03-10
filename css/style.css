@@ -1,0 +1,15 @@
+#mainContainer {
+    /* Ideal width for a single column page */
+    width: clamp(45ch, 50%, 75ch);
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+canvas {
+    background-color: #000;
+    margin: auto;
+    width: 100%;
+}
