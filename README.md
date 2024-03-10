@@ -21,4 +21,5 @@ Personally, I use the `live-server` npm package. In order to get that setup, sim
 and to use it, run:
 `npx live-server`
 
+### Pull requests
 I'm a git noob, so help me merge your pull request. If your contribution is particularly great, I may just pull it to the repo.
