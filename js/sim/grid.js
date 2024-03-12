@@ -15,7 +15,7 @@ class Grid {
 
   // Allow us to set a specific particle in the grid
   set(x, y, particle) {
-    this.grid[y * this.width + x] = color;
+    this.grid[y * this.width + x] = particle;
   }
 
   // Swap 2 particles or spaces

@@ -12,4 +12,5 @@ canvas {
     background-color: #000;
     margin: auto;
     width: 100%;
+    image-rendering: pixelated;
 }

@@ -11,6 +11,12 @@ This is not exactly a roadmap, however some key features I intend on implementin
 - Highly complex emergent behaviour
 - Good art direction (colors, UI, behaviour)
 
+## Todo
+- Add tests, for TDD, maybe with Jest?
+- Add basic rendering
+- Add basic user input with canvas
+- Add support for user input w/ scaled canvas and positioned canvas
+
 ## Contribution
 ### Live server
 In order to get started, simply serve index.html from a live server, in order to not get ECMAscript modules blocked by the CORS policy.
