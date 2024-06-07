@@ -5,6 +5,7 @@ import { Moves } from '../behaviours/moves.js';
 import { Flammable } from '../behaviours/flammable.js';
 import { MovesToSideRandomly } from '../behaviours/movesToSideRandomly.js';
 import { LimitedLife } from '../behaviours/limitedLife.js';
+import { Acid as AcidBehaviour } from '../behaviours/acid.js';
 
 class Empty extends Particle {
 	static baseColor = new Color(0, 0, 0);
@@ -34,6 +35,7 @@ class Wood extends Particle {
 	constructor(index) {
 		super(index, {
             color: Wood.baseColor,
+            acidResistance: 0.9,
             behaviours: [
                 new Flammable({
                     fuel: 200 + 100 * Math.random(),
@@ -44,6 +46,25 @@ class Wood extends Particle {
         });
 	}
 }
+
+class Fuse extends Particle {
+	static baseColor = new Color(39, 37, 67);
+	static elementType = "Solid";
+
+	constructor(index) {
+		super(index, {
+            color: Fuse.baseColor,
+            behaviours: [
+                new Flammable({
+                    fuel: 1 + 30 * Math.random(),
+                    chanceToCatch: 0.1,
+                    emitSmoke: true,
+                })
+            ]
+        });
+	}
+}
+
 
 class NaturalGas extends Particle {
 	static baseColor = new Color(104, 100, 18);
@@ -76,6 +97,7 @@ class Coal extends Particle {
 	constructor(index) {
 		super(index, {
             color: Coal.baseColor,
+            acidResistance: 0.89,
             behaviours: [
                 new Flammable({
                     fuel: 100 + 100 * Math.random(),
@@ -139,6 +161,7 @@ class Sand extends Particle {
 	constructor(index) {
 		super(index, {
             color: Sand.baseColor,
+            acidResistance: 0.93,
 			behaviours: [
 				new Moves({
 					maxSpeed: 12,
@@ -157,6 +180,7 @@ class Snow extends Particle {
 	constructor(index) {
 		super(index, {
             color: Snow.baseColor,
+            acidResistance: 0.5,
 			behaviours: [
 				new Moves({
 					maxSpeed: 0.3,
@@ -177,11 +201,33 @@ class Water extends Particle {
 	constructor(index) {
 		super(index, {
             color: Water.baseColor,
+            acidResistance: 0.7,
 			behaviours: [
 				new Moves({
 					maxSpeed: 12,
 					acceleration: 0.1,
 				})
+			]
+        });
+	}
+}
+
+class Acid extends Particle {
+	static baseColor = new Color(128, 100, 54);
+	static elementType = "Liquid";
+    static cursorProbability = 0.5;
+
+	constructor(index) {
+		super(index, {
+            color: Acid.baseColor,
+			behaviours: [
+				new Moves({
+					maxSpeed: 12,
+					acceleration: 0.2,
+				}),
+                new AcidBehaviour({
+                    acidPersistence: 0.4,
+                })
 			]
         });
 	}
@@ -215,4 +261,4 @@ class Smoke extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Smoke };
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke };

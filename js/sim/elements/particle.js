@@ -1,11 +1,13 @@
 // Base particle class
 class Particle {
-	constructor(index, {color, empty, behaviours} = {}) {
+	constructor(index, {color, empty, behaviours, acidResistance} = {}) {
 		this.index = index;
 		this.color = color;
 		this.empty = empty ?? false;
 		this.behaviours = behaviours ?? [];
 		this.behavioursLookup = Object.fromEntries(this.behaviours.map((b) => [b.constructor.name, b]));
+
+		this.acidResistance = acidResistance ?? 1;
 	}
 
 	update(grid, params) {
