@@ -21,15 +21,12 @@ class Grid {
 
   // Allow us to set a specific particle in the grid (index)
   setIndex(index, particle) {
+    if (index <= 0 || index >= this.grid.length) { return; }
     this.grid[index] = new particle(index);
   }
 
   // Allow us to set a specific particle in the grid (x,y)
   set(x, y, particle) {
-    // Bounds check
-    if (x <= 0 || x >= this.width) { return; }
-    if (y <= 0 || y >= this.height) { return; }
-  
     this.setIndex(y * this.width + x, particle);
   }
 
