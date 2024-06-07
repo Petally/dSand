@@ -54,7 +54,7 @@ class NaturalGas extends Particle {
             color: NaturalGas.baseColor,
             behaviours: [
                 new Flammable({
-                    fuel: 1 + 100 * Math.random(),
+                    fuel: 1 + 50 * Math.random(),
                     chanceToCatch: 0.08
                 }),
                 new Moves({
