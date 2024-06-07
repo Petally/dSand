@@ -1,4 +1,8 @@
 body {
+    font-family: "ＭＳ ゴシック", "Osaka-等幅", "Monaco", "Osaka-Mono", "monospace";
+    font-weight: normal;
+
+    line-height: 1.25;
     background-color: #AAAAAA;
     margin: 0;
 }
@@ -6,6 +10,10 @@ body {
 h1 {
     margin-top: 0;
     text-align: center;
+}
+
+p {
+
 }
 
 canvas {
@@ -22,6 +30,7 @@ canvas {
 
 #mainContainer {
     background-color: #FFFFFF;
+    padding: 16px;
     /* Ideal width for a single column page */
     width: clamp(512px, 50%, 75ch);
     margin: auto;
