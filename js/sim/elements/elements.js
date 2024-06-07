@@ -305,7 +305,7 @@ class Drain extends Particle {
 }
 
 class Cloner extends Particle {
-	static baseColor = new Color(192, 186, 104);
+	static baseColor = new Color(56, 41, 58);
 	static elementType = "Solid";
 
 	constructor(index) {
