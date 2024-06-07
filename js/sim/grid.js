@@ -27,8 +27,8 @@ class Grid {
   // Allow us to set a specific particle in the grid (x,y)
   set(x, y, particle) {
     // Bounds check
-    if (x < 0 || x >= this.width) { return; }
-    if (y < 0 || y >= this.height) { return; }
+    if (x <= 0 || x >= this.width) { return; }
+    if (y <= 0 || y >= this.height) { return; }
   
     this.setIndex(y * this.width + x, particle);
   }
