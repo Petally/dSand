@@ -12,6 +12,7 @@ canvas {
     background-color: #000;
     height: 512px;
     width: 512px;
+    display: block;
     margin: auto;
     image-rendering: pixelated;
 }
