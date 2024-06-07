@@ -21,11 +21,10 @@ Object.values(elements).forEach(e => {
 	let btn = document.createElement('button');
 	btn.innerHTML = e?.name ?? 'No name';
 
-	console.log(e.name);
-
     const container = document.getElementById('buttonContainer');
 	const baseColor = e.baseColor;
 	btn.style.backgroundColor = "hsl(" + baseColor.h + ", " + baseColor.s + "%, " + baseColor.l + "%)";
+
 	btn.addEventListener("click", () => {
 		currentParticleClass = e;
 	});

@@ -6,6 +6,7 @@ import { Flammable } from '../behaviours/flammable.js';
 import { MovesToSideRandomly } from '../behaviours/movesToSideRandomly.js';
 import { LimitedLife } from '../behaviours/limitedLife.js';
 import { Acid as AcidBehaviour } from '../behaviours/acid.js';
+import { PlantBehaviour } from '../behaviours/plant.js';
 
 class Empty extends Particle {
 	static baseColor = new Color(0, 0, 0);
@@ -262,4 +263,28 @@ class Smoke extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke };
+class Plant extends Particle {
+	static baseColor = new Color(138, 100, 39);
+	static elementType = "Solid";
+
+	constructor(index) {
+		super(index, {
+            color: Plant.baseColor,
+            behaviours: [
+                new Flammable({
+                    fuel: 100 + 30 * Math.random(),
+                    chanceToCatch: 0.05,
+                    emitSmoke: true,
+                    smokeChance: 0.05
+                }),
+                new PlantBehaviour({
+                    newlyGrown: true,
+                    growChance: 0.2
+                })
+            ]
+        });
+	}
+}
+
+
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant };
