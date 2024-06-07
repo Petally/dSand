@@ -177,7 +177,7 @@ class Smoke extends Particle {
 		super(index, {
             color: new Color(Smoke.baseColor.h, Smoke.baseColor.s, Smoke.baseColor.l),
 			behaviours: [
-                new LimitedLife(1000 + 100 * Math.random(), {
+                new LimitedLife(500 + 100 * Math.random(), {
                     onTick: (behaviour, particle) => {
                         particle.color.l = Smoke.baseColor.l * behaviour.remainingLife / behaviour.lifetime;
                     },
