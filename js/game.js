@@ -13,7 +13,8 @@ let mouse = {x: 0, y: 0, down: false};
 let oldMousePos = {x: 0, y: 0};
 const grid = new Grid(canvas.width, canvas.height, canvas);
 
-let currentParticleClass = elements.Sand;
+let selectedParticleClass = elements.Sand;
+let penSize = 1;
 
 console.log();
 // Make buttons depending on every elements in elements.js
@@ -26,7 +27,7 @@ Object.values(elements).forEach(e => {
 	btn.style.backgroundColor = "hsl(" + baseColor.h + ", " + baseColor.s + "%, " + baseColor.l + "%)";
 
 	btn.addEventListener("click", () => {
-		currentParticleClass = e;
+		selectedParticleClass = e;
 	});
 
 	container.appendChild(btn);
@@ -59,10 +60,9 @@ function tick(timeStamp) {
   	// If the mouse is down then set particles
 	const mouseIsInCanvas = (mouse.x >= 0 && mouse.x < grid.width && mouse.y >= 0 && mouse.y < grid.height)
 	if (mouse.down && mouseIsInCanvas) {
-		console.log(oldMousePos);
 		const linePositions = grid.getBresenhamLineXY(oldMousePos.x, oldMousePos.y, mouse.x, mouse.y);
 		for (let i = 0; i < linePositions.length; i++) {
-			grid.setCircle(Math.floor(linePositions[i] % grid.height), Math.floor(linePositions[i] / grid.width), 8, currentParticleClass.cursorProbability, currentParticleClass);
+			grid.setCircle(Math.floor(linePositions[i] % grid.height), Math.floor(linePositions[i] / grid.width), penSize, selectedParticleClass.cursorProbability, selectedParticleClass);
 		}
 	}
 

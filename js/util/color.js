@@ -1,3 +1,5 @@
+import { clamp } from "./clamp.js";
+
 // HSL Color helper class
 class Color {
 	constructor(h, s, l) {
@@ -33,6 +35,11 @@ class Color {
 		}
 
 		return [ r * 255, g * 255, b * 255 ];
+	}
+
+	// returns a new color which is the given color subtracted from this color
+	subtract(color) {
+		return new Color(clamp(this.h - color.h, 0, 360), clamp(this.s - color.s, 0, 100), clamp(this.l - color.l, 0, 100));
 	}
 }
 

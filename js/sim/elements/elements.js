@@ -35,7 +35,7 @@ class Wood extends Particle {
 
 	constructor(index) {
 		super(index, {
-            color: Wood.baseColor,
+            color: new Color(Wood.baseColor.h, Wood.baseColor.s, Wood.baseColor.l).subtract(new Color(Math.random() * 2, Math.random() * 4, Math.random() * 20)),
             acidResistance: 0.9,
             behaviours: [
                 new Flammable({
@@ -98,7 +98,7 @@ class Coal extends Particle {
 
 	constructor(index) {
 		super(index, {
-            color: Coal.baseColor,
+            color: new Color(Coal.baseColor.h, Coal.baseColor.s, Coal.baseColor.l).subtract(new Color(Math.random() * 2, 0, Math.random() * 30)),
             acidResistance: 0.89,
             behaviours: [
                 new Flammable({
@@ -162,7 +162,7 @@ class Sand extends Particle {
 
 	constructor(index) {
 		super(index, {
-            color: Sand.baseColor,
+            color: new Color(Sand.baseColor.h, Sand.baseColor.s, Sand.baseColor.l).subtract(new Color(Math.random() * 2, Math.random() * 4, Math.random() * 10)),
             acidResistance: 0.93,
 			behaviours: [
 				new Moves({
