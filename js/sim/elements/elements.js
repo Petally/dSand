@@ -229,13 +229,13 @@ class Acid extends Particle {
             color: Acid.baseColor,
             density: 0.9,
 			behaviours: [
+                new AcidBehaviour({
+                    acidPersistence: 0.4,
+                }),
 				new Moves({
 					maxSpeed: 12,
 					acceleration: 0.2,
 				}),
-                new AcidBehaviour({
-                    acidPersistence: 0.4,
-                })
 			]
         });
 	}

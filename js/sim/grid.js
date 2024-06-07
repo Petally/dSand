@@ -46,21 +46,13 @@ class Grid {
     // Check if in bounds
     if (nextIndex <= 0 || nextIndex >= this.grid.length) { return false; }
     if (this.isEmpty(nextIndex)) { return true; }
-    // if (particle?.elementType === undefined) { return false; }
     if (!this.noWrap(particle.index, nextIndex)) { return false; }
-    if (this.grid[nextIndex]?.elementType == 'Solid') { return false; }
+    if (this.grid[nextIndex].constructor?.elementType === 'Solid') { return false; }
 
-    if (particle.constructor?.elementType == 'Powder') {
+    if (particle.constructor?.elementType === 'Powder') {
       return this.grid[nextIndex].constructor?.elementType === 'Liquid' || this.grid[nextIndex].constructor?.elementType === 'Gas';
     } else if (particle.constructor?.elementType === 'Liquid' || particle.constructor?.elementType === 'Gas') {
-      const moves = particle.getBehaviour('Moves')
-      if (moves) {
-        if (Math.sign(moves.acceleration) === -1) {
-          return (particle.density < this.grid[nextIndex].density && this.grid[nextIndex].constructor?.elementType !== 'Powder');
-        } else {
-          return (particle.density > this.grid[nextIndex].density && this.grid[nextIndex].constructor?.elementType !== 'Powder');
-        }
-      }
+      return (particle.density > this.grid[nextIndex].density && this.grid[nextIndex].constructor?.elementType !== 'Powder');
     }
   }
 
