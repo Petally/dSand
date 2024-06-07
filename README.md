@@ -2,6 +2,8 @@
 ## A falling sand game, on the browser
 dSand is a falling sand game, that I'm making as a simple supplementary personal project to my web-dev self-study. It'll function ideally as a falling sand game, with extra elements not typically seen in other sand games that often, such as advanced physics, player movement, etc. I want to make my own sand game with my own art direction, so I can play my very own ideal sand game! If you like it as well, then that's just fantastic.
 
+This is an amateur project, and in no way is trying to be the 'best' falling sand sim. The code may be ugly, and it might be buggy, however, my end goal is making a sand sim that achieves what I want to see in a sand sim.
+
 ## Goals
 This is not exactly a roadmap, however some key features I intend on implementing are:
 - Gravity, velocity
