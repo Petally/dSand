@@ -77,6 +77,7 @@ class NaturalGas extends Particle {
 	constructor(index) {
 		super(index, {
             color: NaturalGas.baseColor,
+            density: -0.3,
             behaviours: [
                 new Flammable({
                     fuel: 1 + 50 * Math.random(),
@@ -123,6 +124,7 @@ class Oil extends Particle {
 	constructor(index) {
 		super(index, {
             color: Oil.baseColor,
+            density: 2,
             behaviours: [
                 new Flammable({
                     fuel: 10 + 100 * Math.random(),
@@ -205,6 +207,7 @@ class Water extends Particle {
 	constructor(index) {
 		super(index, {
             color: Water.baseColor,
+            density: 1,
             acidResistance: 0.7,
 			behaviours: [
 				new Moves({
@@ -224,6 +227,7 @@ class Acid extends Particle {
 	constructor(index) {
 		super(index, {
             color: Acid.baseColor,
+            density: 0.9,
 			behaviours: [
 				new Moves({
 					maxSpeed: 12,
@@ -246,6 +250,7 @@ class Smoke extends Particle {
 	constructor(index) {
 		super(index, {
             color: new Color(Smoke.baseColor.h, Smoke.baseColor.s, Smoke.baseColor.l),
+            density: -0.4,
 			behaviours: [
                 new LimitedLife(500 + 100 * Math.random(), {
                     onTick: (behaviour, particle) => {
