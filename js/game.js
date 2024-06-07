@@ -20,7 +20,7 @@ console.log();
 // Make buttons depending on every elements in elements.js
 Object.values(elements).forEach(e => {
 	let btn = document.createElement('button');
-	btn.innerHTML = e?.name ?? 'No name';
+	btn.innerText = e?.name ?? 'No name';
 
     const container = document.getElementById('buttonContainer');
 	const baseColor = e.baseColor;

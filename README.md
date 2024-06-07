@@ -14,10 +14,15 @@ This is not exactly a roadmap, however some key features I intend on implementin
 - Good art direction (colors, UI, behaviour)
 
 ## Todo
-- Add tests, for TDD, maybe with Jest?
-- Add basic rendering
-- Add basic user input with canvas
-- Add support for user input w/ scaled canvas and positioned canvas
+### Optimize, optimize, optimize
+- Chunks
+- Multi-threading?
+- Optimize particle structure, particle behaviours
+### UI
+- Pen size chooser
+- Current selected element label
+- Clear grid button
+- Element categories in particle picker
 
 ## Contribution
 ### Live server
