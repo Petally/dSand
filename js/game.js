@@ -14,7 +14,7 @@ let oldMousePos = {x: 0, y: 0};
 const grid = new Grid(canvas.width, canvas.height, canvas);
 
 let selectedParticleClass = elements.Sand;
-let penSize = 0;
+let penSize = 1;
 
 // Make buttons depending on every elements in elements.js
 Object.values(elements).forEach(e => {

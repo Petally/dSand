@@ -59,8 +59,8 @@ class Fuse extends Particle {
             color: Fuse.baseColor,
             behaviours: [
                 new Flammable({
-                    fuel: 1 + 30 * Math.random(),
-                    chanceToCatch: 0.15,
+                    fuel: 10 + 30 * Math.random(),
+                    chanceToCatch: 0.3,
                     emitSmoke: true,
                     smokeChance: 0.05
                 })
