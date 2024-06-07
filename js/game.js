@@ -1,4 +1,5 @@
 // Main game script
+// TODO: Refactor all code, split up code into relevant ESModule files.
 // Imports
 import { Grid } from './sim/grid.js';
 import { clamp } from './util/clamp.js';
@@ -15,6 +16,23 @@ const grid = new Grid(canvas.width, canvas.height, canvas);
 
 let selectedParticleClass = elements.Sand;
 let penSize = 1;
+
+const increaseBrushSizeButton = document.querySelector('#increaseBrushSizeButton');
+const decreaseBrushSizeButton = document.querySelector('#decreaseBrushSizeButton');
+const brushSizeLabel = document.querySelector('#brushSize');
+
+function updateBrushSize(delta) {
+	penSize = clamp(penSize + delta, 0, 16);
+	brushSizeLabel.innerText = penSize;
+}
+
+increaseBrushSizeButton.addEventListener('click', e => {
+	updateBrushSize(1);
+});
+
+decreaseBrushSizeButton.addEventListener('click', e => {
+	updateBrushSize(-1);
+});
 
 // Make buttons depending on every elements in elements.js
 Object.values(elements).forEach(e => {
