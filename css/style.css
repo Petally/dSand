@@ -10,7 +10,8 @@ h1 {
 
 canvas {
     background-color: #000;
+    height: 512px;
+    width: 512px;
     margin: auto;
-    width: 100%;
     image-rendering: pixelated;
 }
