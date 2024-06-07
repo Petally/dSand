@@ -1,10 +1,11 @@
 import { Behaviour } from './behaviour.js';
 
 class PlantBehaviour extends Behaviour {
-    constructor({newlyGrown, growChance} = {}) {
+    constructor({newlyGrown, growChance, growSpeed} = {}) {
       super();
       this.newlyGrown = newlyGrown ?? Math.random() < 0.5;
       this.growChance = growChance ?? 0.1;
+      this.growSpeed = growSpeed ?? 1;
     }
 
     shouldUpdate(params) {
@@ -23,8 +24,8 @@ class PlantBehaviour extends Behaviour {
     }
 
     update(particle, grid, params) {
-        if (!params) { return; }
         if (!this.shouldUpdate(params)) { return; }
+        if (!(Math.random() < this.growSpeed)) { return; }
         const vertical = particle.index + grid.width;
         const otherVertical = particle.index - grid.width;
         const side = particle.index + 1;
@@ -34,8 +35,7 @@ class PlantBehaviour extends Behaviour {
         this.grow(particle, grid, otherVertical);
         this.grow(particle, grid, side);
         this.grow(particle, grid, otherSide);
-
-        if (!this.newlyGrown) { return; }
+        
         this.newlyGrown = false;
     }
 }

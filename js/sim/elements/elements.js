@@ -280,7 +280,8 @@ class Plant extends Particle {
                 }),
                 new PlantBehaviour({
                     newlyGrown: true,
-                    growChance: 0.2
+                    growChance: 0.4,
+                    growSpeed: 0.1,
                 })
             ]
         });
