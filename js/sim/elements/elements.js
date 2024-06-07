@@ -9,6 +9,7 @@ import { Acid as AcidBehaviour } from '../behaviours/acid.js';
 import { PlantBehaviour } from '../behaviours/plant.js';
 import { DrainBehaviour } from '../behaviours/drain.js';
 import { ClonerBehaviour } from '../behaviours/cloner.js';
+import { Reacts } from '../behaviours/reacts.js';
 
 class Empty extends Particle {
 	static baseColor = new Color(0, 0, 0);
@@ -213,7 +214,46 @@ class Water extends Particle {
 				new Moves({
 					maxSpeed: 12,
 					acceleration: 0.1,
-				})
+				}),
+                new Reacts({
+                    reactantBehaviour: 'Flammable',
+                    reactantBehaviourProperty: 'burning',
+                    reactantPropertyValue: true,
+                    resultantParticle: Steam,
+                    chance: 0.01,
+                })
+			]
+        });
+	}
+}
+
+class Steam extends Particle {
+	static baseColor = new Color(222, 60, 80);
+	static elementType = "Gas";
+    static cursorProbability = 0.25;
+
+	constructor(index) {
+		super(index, {
+            color: new Color(Steam.baseColor.h, Steam.baseColor.s, Steam.baseColor.l),
+            density: -0.4,
+			behaviours: [
+                new LimitedLife(500 + 300 * Math.random(), {
+                    onTick: (behaviour, particle) => {
+                        particle.color.l = Steam.baseColor.l / 2 + (Steam.baseColor.l * behaviour.remainingLife / behaviour.lifetime) / 2;
+                    },
+                    onDeath: (_, particle, grid) => {
+                        if (Math.random() < 0.1) {
+                            grid.setIndex(particle.index, Water);
+                        } else {
+                            grid.clearIndex(particle.index);
+                        }
+                    }
+                }),
+				new Moves({
+					maxSpeed: 0.45,
+					acceleration: -0.03,
+				}),
+                new MovesToSideRandomly(0.5)
 			]
         });
 	}
@@ -323,4 +363,4 @@ class Cloner extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner };
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam };
