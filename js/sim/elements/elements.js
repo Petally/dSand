@@ -7,6 +7,8 @@ import { MovesToSideRandomly } from '../behaviours/movesToSideRandomly.js';
 import { LimitedLife } from '../behaviours/limitedLife.js';
 import { Acid as AcidBehaviour } from '../behaviours/acid.js';
 import { PlantBehaviour } from '../behaviours/plant.js';
+import { DrainBehaviour } from '../behaviours/drain.js';
+import { ClonerBehaviour } from '../behaviours/cloner.js';
 
 class Empty extends Particle {
 	static baseColor = new Color(0, 0, 0);
@@ -254,7 +256,7 @@ class Smoke extends Particle {
                     }
                 }),
 				new Moves({
-					maxSpeed: 0.6,
+					maxSpeed: 0.25,
 					acceleration: -0.05,
 				}),
                 new MovesToSideRandomly(0.5)
@@ -288,5 +290,32 @@ class Plant extends Particle {
 	}
 }
 
+class Drain extends Particle {
+	static baseColor = new Color(250, 53, 36);
+	static elementType = "Solid";
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant };
+	constructor(index) {
+		super(index, {
+            color: Drain.baseColor,
+            behaviours: [
+                new DrainBehaviour(),
+            ]
+        });
+	}
+}
+
+class Cloner extends Particle {
+	static baseColor = new Color(192, 186, 104);
+	static elementType = "Solid";
+
+	constructor(index) {
+		super(index, {
+            color: Cloner.baseColor,
+            behaviours: [
+                new ClonerBehaviour(),
+            ]
+        });
+	}
+}
+
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner };

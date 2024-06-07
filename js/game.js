@@ -14,9 +14,8 @@ let oldMousePos = {x: 0, y: 0};
 const grid = new Grid(canvas.width, canvas.height, canvas);
 
 let selectedParticleClass = elements.Sand;
-let penSize = 1;
+let penSize = 0;
 
-console.log();
 // Make buttons depending on every elements in elements.js
 Object.values(elements).forEach(e => {
 	let btn = document.createElement('button');
@@ -62,7 +61,11 @@ function tick(timeStamp) {
 	if (mouse.down && mouseIsInCanvas) {
 		const linePositions = grid.getBresenhamLineXY(oldMousePos.x, oldMousePos.y, mouse.x, mouse.y);
 		for (let i = 0; i < linePositions.length; i++) {
-			grid.setCircle(Math.floor(linePositions[i] % grid.height), Math.floor(linePositions[i] / grid.width), penSize, selectedParticleClass.cursorProbability, selectedParticleClass);
+			if (penSize == 0) {
+				grid.setIndex(linePositions[i], selectedParticleClass);
+			} else {
+				grid.setCircle(Math.floor(linePositions[i] % grid.height), Math.floor(linePositions[i] / grid.width), penSize, selectedParticleClass.cursorProbability, selectedParticleClass);
+			}
 		}
 	}
 
