@@ -149,6 +149,26 @@ class Sand extends Particle {
 	}
 }
 
+class Snow extends Particle {
+	static baseColor = new Color(0, 0, 100);
+	static elementType = "Powder";
+    static cursorProbability = 0.5;
+
+	constructor(index) {
+		super(index, {
+            color: Snow.baseColor,
+			behaviours: [
+				new Moves({
+					maxSpeed: 0.3,
+					acceleration: 0.05,
+				}),
+                new MovesToSideRandomly(0.4)
+			]
+        });
+	}
+}
+
+
 class Water extends Particle {
 	static baseColor = new Color(222, 92, 64);
 	static elementType = "Liquid";
@@ -195,4 +215,4 @@ class Smoke extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, NaturalGas, Oil, Coal, Fire, Sand, Water, Smoke };
+export { Empty, Wall, Wood, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Smoke };
