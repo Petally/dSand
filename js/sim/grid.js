@@ -94,43 +94,30 @@ class Grid {
   }
 
   // Marches thru the grid using bresenham's line algorithm and then returns the index positions in the line
-  getBresenhamLineXY(x1, y1, x2, y2) {
-    let sx = 0;
-    let sy = 0;
-    let dx = 0;
-    let dy = 0;
-    if (x1 < x2) {
-      sx = 1;
-      dx = x2 - x1;
-    } else {
-      sx = -1;
-      dx = x1 - x2;
-    }
-
-    if (y1 < y2) {
-      sy = 1;
-      dy = y2 - y1;
-    } else {
-      sy = -1;
-      dy = y1 - y2;
-    }
-    let err, e2 = dx - dy, undefined;
-    const width = this.width;
-    const height = this.height;
+  getBresenhamLineXY(x0, y0, x1, y1) {
     let positions = [];
-    while (!(x1 == x2 && y1 == y2) && x1 < width && y1 < height && x1 > 0 && y1 > 0) {
-      e2 = err + err;
-      if (e2 > -dy) {
-        err = err - dy;
-        x1 = x1 + sx;
+    const dx = Math.abs(x1 - x0);
+    const dy = Math.abs(y1 - y0);
+    const sx = Math.sign(x1 - x0);
+    const sy = Math.sign(y1 - y0);
+    let err = dx - dy;
+
+    positions.push(y0 * this.width + x0);
+
+    while (!(x0 === x1 && y0 === y1)) {
+      const e2 = 2 * err;
+      if (e2 > -dy) { 
+        err -= dy;
+        x0 += sx;
       }
       if (e2 < dx) {
-        err = err + dx;
-        y1 = y1 + sy;
+        err += dx;
+        y0 += sy;
       }
-      positions.push(y1 * this.width + x1)
+      positions.push(y0 * this.width + x0);
     }
-    return positions
+
+    return positions;
   }
 
   // Call this right before choosing the particle!

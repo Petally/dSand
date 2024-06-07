@@ -270,6 +270,7 @@ class Plant extends Particle {
 	constructor(index) {
 		super(index, {
             color: Plant.baseColor,
+            acidResistance: 0.86,
             behaviours: [
                 new Flammable({
                     fuel: 100 + 30 * Math.random(),
