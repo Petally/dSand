@@ -59,6 +59,7 @@ class Fuse extends Particle {
                     fuel: 1 + 30 * Math.random(),
                     chanceToCatch: 0.1,
                     emitSmoke: true,
+                    smokeChance: 0.05
                 })
             ]
         });

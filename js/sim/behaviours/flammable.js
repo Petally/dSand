@@ -11,7 +11,7 @@ class Flammable extends LimitedLife {
         new Color(51, 93, 48),
     ]
 
-    constructor({fuel, chanceToCatch, emitSmoke, emitEmber, burning}) {
+    constructor({fuel, chanceToCatch, emitSmoke, smokeChance, emitEmber, burning}) {
         super(fuel, {
             onTick: (behaviour, particle) => {
                 const frequency = Math.sqrt(behaviour.lifetime / behaviour.remainingLife);
@@ -21,7 +21,7 @@ class Flammable extends LimitedLife {
                 particle.color = Flammable.colors[colorIndex];
             },
             onDeath: (_, particle, grid) => {
-                if (particle.getBehaviour('Flammable').emitSmoke) {
+                if (particle.getBehaviour('Flammable').emitSmoke && Math.random() < this.smokeChance) {
                     grid.setIndex(particle.index, Smoke);
                 } else {
                     grid.clearIndex(particle.index);
@@ -30,6 +30,7 @@ class Flammable extends LimitedLife {
         })
 
         this.emitSmoke = emitSmoke ?? false;
+        this.smokeChance = smokeChance ?? 0.3;
         this.emitEmber = emitEmber ?? false;
         this.chanceToCatch = chanceToCatch ?? 0.01;
         this.chancesToCatch = 0;
