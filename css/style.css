@@ -1,9 +1,13 @@
+body {
+    background-color: #AAAAAA;
+}
+
 h1 {
     text-align: center;
 }
 
 canvas {
-    background-color: #000;
+    background-color: #000000;
 
     height: 512px;
     width: 512px;
@@ -15,9 +19,11 @@ canvas {
 }
 
 #mainContainer {
+    background-color: #FFFFFF;
     /* Ideal width for a single column page */
     width: clamp(512px, 50%, 75ch);
     margin: auto;
+    /* min-height: 100vh; */
 }
 
 #buttonContainer {
