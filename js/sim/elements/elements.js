@@ -363,4 +363,86 @@ class Cloner extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam };
+class Blood extends Particle {
+	static baseColor = new Color(0, 100, 30);
+	static elementType = "Liquid";
+    static cursorProbability = 0.5;
+
+	constructor(index) {
+		super(index, {
+            color: Blood.baseColor,
+            density: 1.2,
+            acidResistance: 0.5,
+			behaviours: [
+				new Moves({
+					maxSpeed: 12,
+					acceleration: 0.1,
+				}),
+			]
+        });
+	}
+}
+
+class Flesh extends Particle {
+	static baseColor = new Color(0, 90, 50);
+	static elementType = "Solid";
+
+	constructor(index) {
+		super(index, {
+            color: Flesh.baseColor,
+            acidResistance: 0.75,
+			behaviours: [
+                new Flammable({
+                    fuel: 50 + 100 * Math.random(),
+                    chanceToCatch: 0.01
+                }),
+                new Reacts({
+                    reactantBehaviour: 'Flammable',
+                    reactantBehaviourProperty: 'burning',
+                    reactantPropertyValue: true,
+                    resultantParticle: Blood,
+                    chance: 0.01,
+                })
+			]
+        });
+	}
+}
+
+class Skin extends Particle {
+	static baseColor = new Color(42, 45, 55);
+	static elementType = "Solid";
+
+	constructor(index) {
+		super(index, {
+            color: Skin.baseColor,
+            acidResistance: 0.5,
+			behaviours: [
+                new Flammable({
+                    fuel: 50 + 100 * Math.random(),
+                    chanceToCatch: 0.04
+                }),
+                new Reacts({
+                    reactantBehaviour: 'Flammable',
+                    reactantBehaviourProperty: 'burning',
+                    reactantPropertyValue: true,
+                    resultantParticle: Flesh,
+                    chance: 0.01,
+                })
+			]
+        });
+	}
+}
+
+class Bone extends Particle {
+	static baseColor = new Color(0, 0, 90);
+	static elementType = "Solid";
+
+	constructor(index) {
+		super(index, {
+            color: Bone.baseColor,
+            acidResistance: 0.93,
+        });
+	}
+}
+
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Blood, Flesh, Bone, Skin };
