@@ -2,7 +2,6 @@
 // Imports
 import { Grid } from './sim/grid.js';
 import { clamp } from './util/clamp.js';
-
 import * as elements from './sim/elements/elements.js';
 
 const canvas = document.querySelector('canvas');
@@ -33,6 +32,9 @@ Object.values(elements).forEach(e => {
 	container.appendChild(btn);
 });
 
+// Prevent highlighting text if the mouse click started on the canvas
+canvas.onselectstart = () => { return false; }
+
 //Capture inputs for the mouse
 addEventListener("mousedown", e => {
 	mouse.down = true;
@@ -55,9 +57,10 @@ addEventListener("mousemove", e => {
 // Main game and render loop
 function tick(timeStamp) {
   	// If the mouse is down then set particles
-	if (mouse.down) {
+	const mouseIsInCanvas = (mouse.x >= 0 && mouse.x < grid.width && mouse.y >= 0 && mouse.y < grid.height)
+	if (mouse.down && mouseIsInCanvas) {
+		console.log(oldMousePos);
 		const linePositions = grid.getBresenhamLineXY(oldMousePos.x, oldMousePos.y, mouse.x, mouse.y);
-		console.log(linePositions);
 		for (let i = 0; i < linePositions.length; i++) {
 			grid.setCircle(Math.floor(linePositions[i] % grid.height), Math.floor(linePositions[i] / grid.width), 8, currentParticleClass.cursorProbability, currentParticleClass);
 		}
