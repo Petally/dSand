@@ -1,8 +1,10 @@
 body {
     background-color: #AAAAAA;
+    margin: 0;
 }
 
 h1 {
+    margin-top: 0;
     text-align: center;
 }
 
@@ -23,9 +25,9 @@ canvas {
     /* Ideal width for a single column page */
     width: clamp(512px, 50%, 75ch);
     margin: auto;
-    /* min-height: 100vh; */
+    min-height: 100vh;
 }
 
 #buttonContainer {
-    padding-top: 4ch;
+    padding: 2ch;
 }

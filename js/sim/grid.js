@@ -81,6 +81,9 @@ class Grid {
 
   // Set a filled circle of pixels around a given point, along with a probability
   setCircle(centerX, centerY, radius, probability = 1, particle) {
+    // Don't set a circle if the xy coordinates are out of bounds. This prevents accidentally clicking *near* the canvas and setting pixels.
+    if (centerX < 0 || centerX >= this.width) { return; }
+    if (centerY < 0 || centerY >= this.width) { return; }
     for (let x = centerX - radius; x < centerX + radius; x++) {
       for (let y = centerY - radius; y < centerY + radius; y++) {
         if (this.isInsideCircle(centerX, centerY, x, y, radius) && Math.random() <= probability) {
