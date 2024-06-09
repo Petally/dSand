@@ -41,23 +41,8 @@ class Flammable extends LimitedLife {
         return params.direction === 1;
     }
 
-    getSpreadCandidates(particle, grid) {
-        const index = particle.index;
-        let candidates = [];
-        // Each of the 8 directions
-        for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
-                const di = index + dx + dy * grid.width;
-                if (di <= 0 || di >= grid.grid.length) { continue; }
-                if (!grid.noWrap(index, di)) { continue; }
-                candidates.push(di);
-            }
-        }
-        return candidates;
-    }
-
     tryToSpread(particle, grid) {
-        const candidates = this.getSpreadCandidates(particle, grid);
+        const candidates = grid.getMooreNeighborhood(particle.index);
         for (let i = 0; i < candidates.length; i++) {
             const p = grid.getIndex(candidates[i]);
             const flammable = p.getBehaviour('Flammable');

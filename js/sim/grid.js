@@ -128,6 +128,21 @@ class Grid {
     return positions;
   }
 
+  // Returns index positions of moore neighborhood around given index
+  getMooreNeighborhood(index) {
+    let candidates = [];
+    // Each of the 8 directions
+    for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+            const di = index + dx + dy * this.width;
+            if (di <= 0 || di >= this.grid.length) { continue; }
+            if (!this.noWrap(index, di)) { continue; }
+            candidates.push(di);
+        }
+    }
+    return candidates;
+  }
+  
   // Call this right before choosing the particle!
   modifyIndexHook(index, {direction} = {}) {
     if (direction === -1) {
