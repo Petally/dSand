@@ -56,15 +56,15 @@ class Moves extends Behaviour {
             const preferredSide = index + preferredDirection;
             const otherSide = index - preferredDirection;
 
-            if (grid.canPassThrough(particle, nextVertical)) {
+            if (grid.canPassThrough(index, nextVertical)) {
                 grid.swap(index, nextVertical);
-            } else if (grid.canPassThrough(particle, preferredVertical) && grid.noWrap(index, preferredVertical)) {
+            } else if (grid.canPassThrough(index, preferredVertical) && grid.noWrap(index, preferredVertical)) {
                 grid.swap(index, preferredVertical);
-            } else if (grid.canPassThrough(particle, otherVertical) && grid.noWrap(index, otherVertical)) {
+            } else if (grid.canPassThrough(index, otherVertical) && grid.noWrap(index, otherVertical)) {
                 grid.swap(index, otherVertical);
-            } else if (this.isFluid(particle) && grid.canPassThrough(particle, preferredSide) && grid.noWrap(index, preferredSide)) {
+            } else if (this.isFluid(particle) && grid.canPassThrough(index, preferredSide) && grid.noWrap(index, preferredSide)) {
                 grid.swap(index, preferredSide);
-            } else if (this.isFluid(particle) && grid.canPassThrough(particle, otherSide) && grid.noWrap(index, otherSide)) {
+            } else if (this.isFluid(particle) && grid.canPassThrough(index, otherSide) && grid.noWrap(index, otherSide)) {
                 grid.swap(index, otherSide);
             }
 

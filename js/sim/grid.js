@@ -39,20 +39,21 @@ class Grid {
   }
 
   clearIndex(index) {
-    this.getIndex(index) = new elements.Empty(index);
+    this.setIndex(index, elements.Empty);
   }
 
   isEmpty(index) {
     return this.getIndex(index)?.empty ?? false;
   }
 
-  // Returns true if the given particle can go to the next index
-  canPassThrough(particle, nextIndex) {
+  // Returns true if the given index can go to the next index
+  canPassThrough(index, nextIndex) {
     // Check if in bounds
     if (nextIndex <= 0 || nextIndex >= this.grid.length) { return false; }
     if (this.isEmpty(nextIndex)) { return true; }
-    if (!this.noWrap(particle.index, nextIndex)) { return false; }
+    if (!this.noWrap(index, nextIndex)) { return false; }
 
+    const particle = this.getIndex(index);
     const nextParticle = this.getIndex(nextIndex);
     if (nextParticle.constructor?.elementType === 'Solid') { return false; }
 

@@ -14,12 +14,12 @@ class MovesToSideRandomly extends Behaviour {
         if (!this.shouldUpdate(params)) { return; }
         if (!(Math.random() < this.chanceToMove)) { return; }
         const moves = particle.getBehaviour('Moves');
-        if (moves && !(grid.canPassThrough(particle, particle.index + (grid.width * Math.sign(moves.velocity))))) { return; }
+        if (moves && !(grid.canPassThrough(particle.index, particle.index + (grid.width * Math.sign(moves.velocity))))) { return; }
         // Core movement logic
         const index = particle.index;
         const preferredDirection = Math.random() < 0.5 ? 1 : -1;
         const nextIndex = particle.index + preferredDirection;
-        if (!grid.canPassThrough(particle, nextIndex)) { return; }
+        if (!grid.canPassThrough(particle.index, nextIndex)) { return; }
         if (!grid.noWrap(index, nextIndex)) { return; }
         grid.swap(index, nextIndex);
     }
