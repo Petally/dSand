@@ -14,10 +14,10 @@ class PlantBehaviour extends Behaviour {
 
     grow(particle, grid, index) {
         if (!(Math.random() < this.growChance)) { return; }
-        if (!grid.grid[index]) { return; }
+        if (!grid.getIndex(index)) { return; }
         if (!grid.noWrap(particle.index, index)) { return; }
 
-        const newParticle = grid.grid[index]
+        const newParticle =grid.getIndex(index);
         if (newParticle.constructor.name == 'Water' || (grid.isEmpty(index) && this.newlyGrown)) {
             grid.setIndex(index, particle.constructor);
         }

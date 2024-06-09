@@ -58,9 +58,9 @@ class Moves extends Behaviour {
 
             if (grid.canPassThrough(particle, nextVertical)) {
                 grid.swap(index, nextVertical);
-            } else if (grid.canPassThrough(particle, preferredVertical) && grid.grid[preferredSide].constructor?.elementType !== "Solid" && grid.noWrap(index, preferredVertical)) {
+            } else if (grid.canPassThrough(particle, preferredVertical) && grid.noWrap(index, preferredVertical)) {
                 grid.swap(index, preferredVertical);
-            } else if (grid.canPassThrough(particle, otherVertical) && grid.grid[otherSide].constructor?.elementType !== "Solid" && grid.noWrap(index, otherVertical)) {
+            } else if (grid.canPassThrough(particle, otherVertical) && grid.noWrap(index, otherVertical)) {
                 grid.swap(index, otherVertical);
             } else if (this.isFluid(particle) && grid.canPassThrough(particle, preferredSide) && grid.noWrap(index, preferredSide)) {
                 grid.swap(index, preferredSide);

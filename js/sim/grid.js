@@ -19,6 +19,11 @@ class Grid {
     this.grid = new Array(this.width * this.height).fill(0).map((_, i) => new elements.Empty(i));
   }
 
+  // Gets the particle at a given index
+  getIndex(index) { 
+    return this.grid[index];
+  }
+
   // Allow us to set a specific particle in the grid (index)
   setIndex(index, particle) {
     if (index <= 0 || index >= this.grid.length) { return; }
@@ -34,11 +39,11 @@ class Grid {
   }
 
   clearIndex(index) {
-    this.grid[index] = new elements.Empty(index);
+    this.getIndex(index) = new elements.Empty(index);
   }
 
   isEmpty(index) {
-    return this.grid[index]?.empty ?? false;
+    return this.getIndex(index)?.empty ?? false;
   }
 
   // Returns true if the given particle can go to the next index
@@ -47,12 +52,14 @@ class Grid {
     if (nextIndex <= 0 || nextIndex >= this.grid.length) { return false; }
     if (this.isEmpty(nextIndex)) { return true; }
     if (!this.noWrap(particle.index, nextIndex)) { return false; }
-    if (this.grid[nextIndex].constructor?.elementType === 'Solid') { return false; }
+
+    const nextParticle = this.getIndex(nextIndex);
+    if (nextParticle.constructor?.elementType === 'Solid') { return false; }
 
     if (particle.constructor?.elementType === 'Powder') {
-      return this.grid[nextIndex].constructor?.elementType === 'Liquid' || this.grid[nextIndex].constructor?.elementType === 'Gas';
+      return nextParticle.constructor?.elementType === 'Liquid' || nextParticle.constructor?.elementType === 'Gas';
     } else if (particle.constructor?.elementType === 'Liquid' || particle.constructor?.elementType === 'Gas') {
-      return (particle.density > this.grid[nextIndex].density && this.grid[nextIndex].constructor?.elementType !== 'Powder');
+      return (particle.density > nextParticle.density && nextParticle.constructor?.elementType !== 'Powder');
     }
   }
 
@@ -137,7 +144,7 @@ class Grid {
         const xOffset = leftToRight ? x : -x - 1 + this.width;
         const index = this.modifyIndexHook(yOffset + xOffset, params)
         if (this.isEmpty(index)) { continue; }
-        const particle = this.grid[index];
+        const particle = this.getIndex(index);
         particle.update(this, params);
       }
     }

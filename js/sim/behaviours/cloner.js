@@ -11,12 +11,12 @@ class ClonerBehaviour extends Behaviour {
     }
 
     clone(particle, grid, clonePosition, index) {
-        if (!grid.grid[index] || !grid.grid[clonePosition]) { return; }
-        if (grid.isEmpty(index) || grid.grid[index].constructor.elementType == 'Solid') { return; }
-        if (grid.grid[clonePosition].constructor.elementType == 'Solid') { return; }
+        if (!grid.getIndex(index) || !grid.getIndex(clonePosition)) { return; }
+        if (grid.isEmpty(index) || grid.getIndex(index).constructor.elementType == 'Solid') { return; }
+        if (grid.getIndex(clonePosition).constructor.elementType == 'Solid') { return; }
         if (!grid.noWrap(particle.index, clonePosition)) { return; }
 
-        grid.setIndex(clonePosition, grid.grid[index].constructor)
+        grid.setIndex(clonePosition, grid.getIndex(index).constructor)
     }
 
     update(particle, grid, params) {

@@ -11,11 +11,11 @@ class DrainBehaviour extends Behaviour {
     }
 
     drain(particle, grid, index) {
-        if (!grid.grid[index]) { return; }
+        if (!grid.getIndex(index)) { return; }
         if (grid.isEmpty(index)) { return; }
         if (!grid.noWrap(particle.index, index)) { return; }
 
-        const particleToDrain = grid.grid[index]
+        const particleToDrain = grid.getIndex(index);
         if (particleToDrain && !particleToDrain.getBehaviour('DrainBehaviour')) {
             grid.clearIndex(particleToDrain.index);
         }

@@ -12,7 +12,7 @@ class Acid extends Behaviour {
     }
 
     eat(particle, grid, index) {
-        if (!grid.grid[index]) { return; }
+        if (!grid.getIndex(index)) { return; }
         if (grid.isEmpty(index)) { return; }
         if (!grid.noWrap(particle.index, index)) { return; }
 

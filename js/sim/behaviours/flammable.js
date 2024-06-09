@@ -59,7 +59,7 @@ class Flammable extends LimitedLife {
     tryToSpread(particle, grid) {
         const candidates = this.getSpreadCandidates(particle, grid);
         for (let i = 0; i < candidates.length; i++) {
-            const p = grid.grid[candidates[i]];
+            const p = grid.getIndex(candidates[i]);
             const flammable = p.getBehaviour('Flammable');
             if (!flammable) { continue; }
             if (flammable.burning) { continue; }

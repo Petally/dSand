@@ -27,10 +27,10 @@ class Reacts extends Behaviour {
 
     react(particle, grid, index) {
         if (!(Math.random() < this.chance)) { return; }
-        if (!grid.grid[index]) { return; }
+        if (!grid.getIndex(index)) { return; }
         if (!grid.noWrap(particle.index, index)) { return; }
 
-        const newParticle = grid.grid[index];
+        const newParticle = grid.getIndex(index);
         const reactsWithBehaviour = (this.reactantBehaviour && newParticle.getBehaviour(this.reactantBehaviour) && newParticle.getBehaviour(this.reactantBehaviour)[this.reactantBehaviourProperty] == this.reactantPropertyValue);
         const reactsWithParticle = (this.reactantParticle && newParticle.constructor.name === this.reactantParticle)
         if (reactsWithBehaviour || reactsWithParticle) {
