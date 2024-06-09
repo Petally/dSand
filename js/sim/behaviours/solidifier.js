@@ -14,7 +14,7 @@ class SolidifierBehaviour extends Behaviour {
     solidify(particleToSolidify, grid) {
         particleToSolidify.removeBehaviour('Moves');
         particleToSolidify.removeBehaviour('MovesToSideRandomly');
-        particleToSolidify.elementType = 'Powder'
+        particleToSolidify.elementType = 'Powder';
         particleToSolidify.color = particleToSolidify.color.subtract(new Color(0, 0, -10));
     }
 
