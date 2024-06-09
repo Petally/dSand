@@ -83,8 +83,8 @@ function tick(timeStamp) {
 		}
 	}
 
-	oldMousePos.x = mouse.x;
-	oldMousePos.y = mouse.y;
+	oldMousePos.x = clamp(mouse.x, 0, grid.width - 1);
+	oldMousePos.y = clamp(mouse.y, 0, grid.height - 1);
 
 	// Update the grid
 	grid.update();
