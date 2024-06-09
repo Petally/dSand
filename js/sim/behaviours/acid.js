@@ -16,7 +16,7 @@ class Acid extends Behaviour {
         if (grid.isEmpty(index)) { return; }
         if (!grid.noWrap(particle.index, index)) { return; }
 
-        const particleToEat = grid.grid[index]
+        const particleToEat = grid.getIndex(index)
         if (particleToEat.getBehaviour('Acid')) { return; }
 
         const acidResistance = particleToEat.acidResistance;

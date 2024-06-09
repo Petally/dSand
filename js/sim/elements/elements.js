@@ -10,6 +10,7 @@ import { PlantBehaviour } from '../behaviours/plant.js';
 import { DrainBehaviour } from '../behaviours/drain.js';
 import { ClonerBehaviour } from '../behaviours/cloner.js';
 import { Reacts } from '../behaviours/reacts.js';
+import { LiquifierBehaviour } from '../behaviours/liquifier.js';
 
 class Empty extends Particle {
 	static baseColor = new Color(0, 0, 0);
@@ -23,22 +24,24 @@ class Empty extends Particle {
 
 class Wall extends Particle {
 	static baseColor = new Color(0, 0, 50);
-	static elementType = "Solid";
+	static baseElementType = 'Solid';
 
 	constructor(index) {
 		super(index, {
             color: Wall.baseColor,
+            elementType: Wall.baseElementType
         });
 	}
 }
 
 class Wood extends Particle {
 	static baseColor = new Color(32, 100, 25);
-	static elementType = "Solid";
+	static baseElementType = 'Solid';
 
 	constructor(index) {
 		super(index, {
             color: new Color(Wood.baseColor.h, Wood.baseColor.s, Wood.baseColor.l).subtract(new Color(Math.random() * 2, Math.random() * 4, Math.random() * 20)),
+            elementType: Wood.baseElementType,
             acidResistance: 0.9,
             behaviours: [
                 new Flammable({
@@ -53,11 +56,12 @@ class Wood extends Particle {
 
 class Fuse extends Particle {
 	static baseColor = new Color(39, 37, 67);
-	static elementType = "Solid";
+	static baseElementType = 'Solid';
 
 	constructor(index) {
 		super(index, {
             color: Fuse.baseColor,
+            elementType: Fuse.baseElementType,
             behaviours: [
                 new Flammable({
                     fuel: 10 + 30 * Math.random(),
@@ -73,11 +77,12 @@ class Fuse extends Particle {
 
 class NaturalGas extends Particle {
 	static baseColor = new Color(104, 100, 18);
-	static elementType = "Gas";
+	static baseElementType = 'Gas';
 
 	constructor(index) {
 		super(index, {
             color: NaturalGas.baseColor,
+            elementType: NaturalGas.baseElementType,
             density: -0.3,
             behaviours: [
                 new Flammable({
@@ -98,11 +103,13 @@ class NaturalGas extends Particle {
 
 class Coal extends Particle {
 	static baseColor = new Color(0, 0, 25);
-	static elementType = "Powder";
+	static baseElementType = 'Powder';
 
 	constructor(index) {
 		super(index, {
             color: new Color(Coal.baseColor.h, Coal.baseColor.s, Coal.baseColor.l).subtract(new Color(Math.random() * 2, 0, Math.random() * 30)),
+            elementType: Coal.baseElementType,
+            density: 1.22,
             acidResistance: 0.89,
             behaviours: [
                 new Flammable({
@@ -120,11 +127,12 @@ class Coal extends Particle {
 
 class Oil extends Particle {
 	static baseColor = new Color(302, 100, 26);
-	static elementType = "Liquid";
+	static baseElementType = "Liquid";
 
 	constructor(index) {
 		super(index, {
             color: Oil.baseColor,
+            elementType: Oil.baseElementType,
             density: 2,
             behaviours: [
                 new Flammable({
@@ -143,11 +151,12 @@ class Oil extends Particle {
 
 class Fire extends Particle {
 	static baseColor = new Color(0, 100, 50);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Fire.baseColor,
+            elementType: Fire.baseElementType,
             behaviours: [
                 new Flammable({
                     fuel: 1 + 100 * Math.random(),
@@ -162,12 +171,14 @@ class Fire extends Particle {
 
 class Sand extends Particle {
 	static baseColor = new Color(40, 100, 50);
-	static elementType = "Powder";
+	static baseElementType = "Powder";
     static cursorProbability = 0.5;
 
 	constructor(index) {
 		super(index, {
             color: new Color(Sand.baseColor.h, Sand.baseColor.s, Sand.baseColor.l).subtract(new Color(Math.random() * 2, Math.random() * 4, Math.random() * 10)),
+            elementType: Sand.baseElementType,
+            density: 1.2,
             acidResistance: 0.93,
 			behaviours: [
 				new Moves({
@@ -181,12 +192,14 @@ class Sand extends Particle {
 
 class Snow extends Particle {
 	static baseColor = new Color(0, 0, 100);
-	static elementType = "Powder";
+	static baseElementType = "Powder";
     static cursorProbability = 0.5;
 
 	constructor(index) {
 		super(index, {
             color: Snow.baseColor,
+            elementType: Snow.baseElementType,
+            density: 1.03,
             acidResistance: 0.5,
 			behaviours: [
 				new Moves({
@@ -202,12 +215,13 @@ class Snow extends Particle {
 
 class Water extends Particle {
 	static baseColor = new Color(222, 92, 64);
-	static elementType = "Liquid";
+	static baseElementType = "Liquid";
     static cursorProbability = 0.5;
 
 	constructor(index) {
 		super(index, {
             color: Water.baseColor,
+            elementType: Water.baseElementType,
             density: 1,
             acidResistance: 0.7,
 			behaviours: [
@@ -229,12 +243,13 @@ class Water extends Particle {
 
 class Steam extends Particle {
 	static baseColor = new Color(222, 60, 80);
-	static elementType = "Gas";
+	static baseElementType = "Gas";
     static cursorProbability = 0.25;
 
 	constructor(index) {
 		super(index, {
             color: new Color(Steam.baseColor.h, Steam.baseColor.s, Steam.baseColor.l),
+            elementType: Steam.baseElementType,
             density: -0.4,
 			behaviours: [
                 new LimitedLife(500 + 300 * Math.random(), {
@@ -261,12 +276,13 @@ class Steam extends Particle {
 
 class Acid extends Particle {
 	static baseColor = new Color(128, 100, 54);
-	static elementType = "Liquid";
+	static baseElementType = "Liquid";
     static cursorProbability = 0.5;
 
 	constructor(index) {
 		super(index, {
             color: Acid.baseColor,
+            elementType: Acid.baseElementType,
             density: 0.9,
 			behaviours: [
                 new AcidBehaviour({
@@ -284,12 +300,13 @@ class Acid extends Particle {
 
 class Smoke extends Particle {
 	static baseColor = new Color(0, 0, 50);
-	static elementType = "Gas";
+	static baseElementType = "Gas";
     static cursorProbability = 0.25;
 
 	constructor(index) {
 		super(index, {
             color: new Color(Smoke.baseColor.h, Smoke.baseColor.s, Smoke.baseColor.l),
+            elementType: Smoke.baseElementType,
             density: -0.4,
 			behaviours: [
                 new LimitedLife(500 + 100 * Math.random(), {
@@ -312,11 +329,13 @@ class Smoke extends Particle {
 
 class Plant extends Particle {
 	static baseColor = new Color(138, 100, 39);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Plant.baseColor,
+            elementType: Plant.baseElementType,
+            density: 0.9,
             acidResistance: 0.86,
             behaviours: [
                 new Flammable({
@@ -337,11 +356,12 @@ class Plant extends Particle {
 
 class Drain extends Particle {
 	static baseColor = new Color(250, 53, 36);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Drain.baseColor,
+            elementType: Drain.baseElementType,
             behaviours: [
                 new DrainBehaviour(),
             ]
@@ -351,11 +371,12 @@ class Drain extends Particle {
 
 class Cloner extends Particle {
 	static baseColor = new Color(56, 41, 58);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Cloner.baseColor,
+            elementType: Cloner.baseElementType,
             behaviours: [
                 new ClonerBehaviour(),
             ]
@@ -365,12 +386,13 @@ class Cloner extends Particle {
 
 class Blood extends Particle {
 	static baseColor = new Color(0, 100, 30);
-	static elementType = "Liquid";
+	static baseElementType = "Liquid";
     static cursorProbability = 0.5;
 
 	constructor(index) {
 		super(index, {
             color: Blood.baseColor,
+            elementType: Blood.baseElementType,
             density: 1.2,
             acidResistance: 0.5,
 			behaviours: [
@@ -385,11 +407,13 @@ class Blood extends Particle {
 
 class Flesh extends Particle {
 	static baseColor = new Color(0, 90, 50);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Flesh.baseColor,
+            elementType: Flesh.baseElementType,
+            density: 1.14,
             acidResistance: 0.75,
 			behaviours: [
                 new Flammable({
@@ -410,11 +434,13 @@ class Flesh extends Particle {
 
 class Skin extends Particle {
 	static baseColor = new Color(42, 45, 55);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Skin.baseColor,
+            elementType: Skin.baseElementType,
+            density: 1.12,
             acidResistance: 0.5,
 			behaviours: [
                 new Flammable({
@@ -435,14 +461,37 @@ class Skin extends Particle {
 
 class Bone extends Particle {
 	static baseColor = new Color(0, 0, 90);
-	static elementType = "Solid";
+	static baseElementType = "Solid";
 
 	constructor(index) {
 		super(index, {
             color: Bone.baseColor,
+            elementType: Bone.baseElementType,
+            density: 1.64,
             acidResistance: 0.93,
         });
 	}
 }
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Blood, Flesh, Bone, Skin };
+class Liquifier extends Particle {
+	static baseColor = new Color(180, 50, 50);
+	static baseElementType = "Gas";
+    static cursorProbability = 0.25;
+
+	constructor(index) {
+		super(index, {
+            color: new Color(Liquifier.baseColor.h, Liquifier.baseColor.s, Liquifier.baseColor.l),
+            elementType: Liquifier.baseElementType,
+            density: -0.5,
+			behaviours: [
+				new Moves({
+					maxSpeed: 0.25,
+					acceleration: -0.05,
+				}),
+                new LiquifierBehaviour()
+			]
+        });
+	}
+}
+
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Blood, Flesh, Bone, Skin, Liquifier };

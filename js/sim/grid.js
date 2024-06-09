@@ -55,12 +55,12 @@ class Grid {
 
     const particle = this.getIndex(index);
     const nextParticle = this.getIndex(nextIndex);
-    if (nextParticle.constructor?.elementType === 'Solid') { return false; }
+    if (nextParticle.elementType === 'Solid') { return false; }
 
-    if (particle.constructor?.elementType === 'Powder') {
-      return nextParticle.constructor?.elementType === 'Liquid' || nextParticle.constructor?.elementType === 'Gas';
-    } else if (particle.constructor?.elementType === 'Liquid' || particle.constructor?.elementType === 'Gas') {
-      return (particle.density > nextParticle.density && nextParticle.constructor?.elementType !== 'Powder');
+    if (particle.elementType === 'Powder') {
+      return nextParticle.elementType === 'Liquid' || nextParticle.elementType === 'Gas';
+    } else if (particle.elementType === 'Liquid' || particle.elementType === 'Gas') {
+      return (particle.density > nextParticle.density && nextParticle.elementType !== 'Powder');
     }
   }
 

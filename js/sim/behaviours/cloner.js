@@ -12,8 +12,8 @@ class ClonerBehaviour extends Behaviour {
 
     clone(particle, grid, clonePosition, index) {
         if (!grid.getIndex(index) || !grid.getIndex(clonePosition)) { return; }
-        if (grid.isEmpty(index) || grid.getIndex(index).constructor.elementType == 'Solid') { return; }
-        if (grid.getIndex(clonePosition).constructor.elementType == 'Solid') { return; }
+        if (grid.isEmpty(index) || grid.getIndex(index).elementType == 'Solid') { return; }
+        if (grid.getIndex(clonePosition).elementType == 'Solid') { return; }
         if (!grid.noWrap(particle.index, clonePosition)) { return; }
 
         grid.setIndex(clonePosition, grid.getIndex(index).constructor)

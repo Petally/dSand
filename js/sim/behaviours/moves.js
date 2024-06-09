@@ -32,7 +32,7 @@ class Moves extends Behaviour {
     }
 
     isFluid(particle) {
-        return particle.constructor?.elementType === 'Liquid' || particle.constructor?.elementType === 'Gas';
+        return particle.elementType === 'Liquid' || particle.elementType === 'Gas';
     }
 
     shouldUpdate(params) {
