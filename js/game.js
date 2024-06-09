@@ -66,10 +66,6 @@ addEventListener("mousemove", e => {
 	const rect = canvas.getBoundingClientRect();
 	mouse.x = Math.floor((e.clientX - rect.left) / (rect.right - rect.left) * canvas.width);
 	mouse.y = Math.floor((e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
-
-	// Clamp mouse positions to canvas/grid boundaries
-	mouse.x = clamp(mouse.x, 0, grid.width - 1);
-	mouse.y = clamp(mouse.y, 0, grid.height - 1);
 });
 
 // Main game and render loop
