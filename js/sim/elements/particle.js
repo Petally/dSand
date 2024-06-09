@@ -30,6 +30,11 @@ class Particle {
 		this.behaviours.push(behaviour);
 		this.updateBehavioursLookup();
 	}
+
+	removeBehaviour(name) {
+		this.behaviours = this.behaviours.filter((behaviour) => behaviour.constructor.name !== name);
+		this.updateBehavioursLookup();
+	}
 }
 
 export { Particle };

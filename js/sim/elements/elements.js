@@ -11,6 +11,7 @@ import { DrainBehaviour } from '../behaviours/drain.js';
 import { ClonerBehaviour } from '../behaviours/cloner.js';
 import { Reacts } from '../behaviours/reacts.js';
 import { LiquifierBehaviour } from '../behaviours/liquifier.js';
+import { SolidifierBehaviour } from '../behaviours/solidifier.js';
 
 class Empty extends Particle {
 	static baseColor = new Color(0, 0, 0);
@@ -494,4 +495,24 @@ class Liquifier extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Blood, Flesh, Bone, Skin, Liquifier };
+class Solidifier extends Particle {
+	static baseColor = new Color(270, 50, 50);
+	static baseElementType = "Gas";
+
+	constructor(index) {
+		super(index, {
+            color: new Color(Solidifier.baseColor.h, Solidifier.baseColor.s, Solidifier.baseColor.l),
+            elementType: Solidifier.baseElementType,
+            density: -0.5,
+			behaviours: [
+                new SolidifierBehaviour(),
+                new Moves({
+                    maxSpeed: 0.5,
+                    acceleration: -0.01,
+                }),
+			]
+        });
+	}
+}
+
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Blood, Flesh, Bone, Skin, Liquifier, Solidifier };

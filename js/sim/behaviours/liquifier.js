@@ -32,7 +32,7 @@ class LiquifierBehaviour extends Behaviour {
         if (!grid.noWrap(particle.index, index)) { return; }
 
         const particleToLiquify = grid.getIndex(index);
-        if (particleToLiquify.getBehaviour('LiquifierBehaviour')) { return; }
+        if (particleToLiquify.getBehaviour('LiquifierBehaviour') || particleToLiquify.getBehaviour('SolidifierBehaviour')) { return; }
         if (particleToLiquify.elementType === 'Solid' && !particleToLiquify.acidResistance) { return; }
         if (particleToLiquify.elementType === 'Liquid') { return; }
 
