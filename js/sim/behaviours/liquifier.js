@@ -5,6 +5,7 @@ import { Color } from '../../util/color.js';
 class LiquifierBehaviour extends Behaviour {
     constructor() {
       super();
+      this.liquified = false;
     }
 
     shouldUpdate(params) {
@@ -24,6 +25,7 @@ class LiquifierBehaviour extends Behaviour {
         moves.acceleration = Math.abs(moves.acceleration);
         particleToLiquify.elementType = 'Liquid';
         particleToLiquify.color = particleToLiquify.color.subtract(new Color(0, 0, 10));
+        this.liquified = true;
     }
 
     tryLiquify(particle, grid, index) {
@@ -56,6 +58,10 @@ class LiquifierBehaviour extends Behaviour {
         this.tryLiquify(particle, grid, otherVertical);
         this.tryLiquify(particle, grid, side);
         this.tryLiquify(particle, grid, otherSide);
+
+        if (this.liquified) {
+            grid.clearIndex(particle.index);
+        }
     }
 }
 

@@ -5,6 +5,7 @@ import { Color } from '../../util/color.js';
 class SolidifierBehaviour extends Behaviour {
     constructor() {
       super();
+      this.solidifed = false;
     }
 
     shouldUpdate(params) {
@@ -12,14 +13,15 @@ class SolidifierBehaviour extends Behaviour {
     }
 
     solidify(particleToSolidify, grid) {
-        particleToSolidify.removeBehaviour('Moves');
         particleToSolidify.removeBehaviour('MovesToSideRandomly');
-        if (particleToSolidify === 'Powder') {
-            particleToSolidify.elementType = 'Solid';
-        } else {
-            particleToSolidify.elementType = 'Powder';
+        const moves = particleToSolidify.getBehaviour('Moves');
+        if (moves) {
+            moves.acceleration = Math.abs(moves.acceleration);
         }
+
+        particleToSolidify.elementType = 'Powder';
         particleToSolidify.color = particleToSolidify.color.subtract(new Color(0, 0, -10));
+        this.solidified = true;
     }
 
     trySolidify(particle, grid, index) {
@@ -29,7 +31,7 @@ class SolidifierBehaviour extends Behaviour {
 
         const particleToSolidify = grid.getIndex(index);
         if (particleToSolidify.getBehaviour('LiquifierBehaviour') || particleToSolidify.getBehaviour('SolidifierBehaviour')) { return; }
-        if (particleToSolidify.elementType === 'Solid') { return; }
+        if (particleToSolidify.elementType === 'Powder' || particleToSolidify.elementType === 'Solid') { return; }
 
         this.solidify(particleToSolidify)
     }
@@ -39,6 +41,9 @@ class SolidifierBehaviour extends Behaviour {
         const neighbors = grid.getMooreNeighborhood(particle.index);
         for (let i = 0; i < neighbors.length; i++) {
             this.trySolidify(particle, grid, neighbors[i]);
+        }
+        if (this.solidified) {
+            grid.clearIndex(particle.index);
         }
     }
 }
