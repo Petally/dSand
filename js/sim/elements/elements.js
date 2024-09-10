@@ -385,95 +385,6 @@ class Cloner extends Particle {
 	}
 }
 
-class Blood extends Particle {
-	static baseColor = new Color(0, 100, 30);
-	static baseElementType = "Liquid";
-    static cursorProbability = 0.5;
-
-	constructor(index) {
-		super(index, {
-            color: Blood.baseColor,
-            elementType: Blood.baseElementType,
-            density: 1.2,
-            acidResistance: 0.5,
-			behaviours: [
-				new Moves({
-					maxSpeed: 12,
-					acceleration: 0.1,
-				}),
-			]
-        });
-	}
-}
-
-class Flesh extends Particle {
-	static baseColor = new Color(0, 90, 50);
-	static baseElementType = "Solid";
-
-	constructor(index) {
-		super(index, {
-            color: Flesh.baseColor,
-            elementType: Flesh.baseElementType,
-            density: 1.14,
-            acidResistance: 0.75,
-			behaviours: [
-                new Flammable({
-                    fuel: 50 + 100 * Math.random(),
-                    chanceToCatch: 0.01
-                }),
-                new Reacts({
-                    reactantBehaviour: 'Flammable',
-                    reactantBehaviourProperty: 'burning',
-                    reactantPropertyValue: true,
-                    resultantParticle: Blood,
-                    chance: 0.01,
-                })
-			]
-        });
-	}
-}
-
-class Skin extends Particle {
-	static baseColor = new Color(42, 45, 55);
-	static baseElementType = "Solid";
-
-	constructor(index) {
-		super(index, {
-            color: Skin.baseColor,
-            elementType: Skin.baseElementType,
-            density: 1.12,
-            acidResistance: 0.5,
-			behaviours: [
-                new Flammable({
-                    fuel: 50 + 100 * Math.random(),
-                    chanceToCatch: 0.04
-                }),
-                new Reacts({
-                    reactantBehaviour: 'Flammable',
-                    reactantBehaviourProperty: 'burning',
-                    reactantPropertyValue: true,
-                    resultantParticle: Flesh,
-                    chance: 0.01,
-                })
-			]
-        });
-	}
-}
-
-class Bone extends Particle {
-	static baseColor = new Color(0, 0, 90);
-	static baseElementType = "Solid";
-
-	constructor(index) {
-		super(index, {
-            color: Bone.baseColor,
-            elementType: Bone.baseElementType,
-            density: 1.64,
-            acidResistance: 0.93,
-        });
-	}
-}
-
 class Liquifier extends Particle {
 	static baseColor = new Color(180, 50, 50);
 	static baseElementType = "Gas";
@@ -515,4 +426,5 @@ class Solidifier extends Particle {
 	}
 }
 
-export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Blood, Flesh, Bone, Skin, Liquifier, Solidifier };
+
+export { Empty, Wall, Wood, Fuse, NaturalGas, Oil, Coal, Fire, Sand, Snow, Water, Acid, Smoke, Plant, Drain, Cloner, Steam, Liquifier, Solidifier };
